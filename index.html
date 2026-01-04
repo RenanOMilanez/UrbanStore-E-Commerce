@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban E-commerce | Premium Store</title>
+    
+    <!-- Fonte Plus Jakarta Sans para um visual moderno e premium -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Variáveis de Design Premium --- */
+        :root {
+            --primary-start: #4f46e5; /* Indigo */
+            --primary-end: #9333ea;   /* Purple */
+            --accent-color: #0f172a;  /* Dark Slate */
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-light: #e2e8f0;
+            --success: #10b981;
+            
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -2px rgb(0 0 0 / 0.025);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.01);
+            
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main { flex: 1; }
+
+        /* --- Header Glassmorphism --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            z-index: 100;
+            padding: 1rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            letter-spacing: -0.03em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo span { color: var(--primary-start); }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cart-trigger {
+            position: relative;
+            cursor: pointer;
+            padding: 0.75rem;
+            border-radius: 50%;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-trigger:hover { background: rgba(0,0,0,0.05); }
+
+        .cart-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            min-width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+        }
+
+        .cart-badge.active { transform: scale(1); }
+
+        /* --- Hero Section Premium --- */
+        .hero {
+            margin-top: 80px;
+            position: relative;
+            display: grid;
+            grid-template-rows: 55% 45%;
+            height: 85vh;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            margin-bottom: 5rem;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        
+        .hero:hover .hero-image { transform: scale(1.03); }
+
+        .hero-content {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 4rem 2rem; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-tagline {
+            color: #94a3b8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero-title {
+            font-size: 6rem; 
+            font-weight: 800;
+            line-height: 0.85; 
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.04em; 
+            white-space: nowrap; 
+        }
+
+        .hero-desc {
+            color: #cbd5e1;
+            font-size: 1.125rem;
+            max-width: 600px; 
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .pill {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .pill-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .socials {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .social-btn:hover {
+            background: white;
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- Product Showcase --- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem 6rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: -0.01em;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        @media (min-width: 1024px) {
+            .grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 1023px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* --- Advanced Product Card --- */
+        .card {
+            background: var(--surface-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            group: 'card';
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card-image-container {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+            background: #f1f5f9;
+        }
+
+        .card-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img { transform: scale(1.08); }
+
+        .add-btn-overlay {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: white;
+            color: var(--accent-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .card:hover .add-btn-overlay {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .add-btn-overlay:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .cat {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* --- Pagination Styling --- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border-light);
+            background: white;
+            color: var(--text-main);
+            border-radius: var(--radius-sm); 
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-main);
+        }
+
+        .page-btn:hover {
+            border-color: var(--primary-start);
+            color: var(--primary-start);
+            transform: translateY(-2px);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+        }
+
+        /* --- Footer Styling --- */
+        footer {
+            background-color: var(--accent-color);
+            color: #f1f5f9;
+            padding: 5rem 2rem 2rem;
+            margin-top: auto;
+            border-top: 4px solid transparent;
+            border-image: linear-gradient(to right, var(--primary-start), var(--primary-end)) 1;
+            position: relative;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-brand span { color: var(--primary-start); }
+
+        .footer-brand p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-end);
+            padding-left: 5px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-family: inherit;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary-start);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .newsletter-btn {
+            padding: 0 1.25rem;
+            border-radius: var(--radius-sm);
+            border: none;
+            background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .newsletter-btn:hover { opacity: 0.9; }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .copyright {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .payment-methods {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .payment-icon {
+            height: 24px;
+            width: auto;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .payment-icon:hover { opacity: 1; }
+
+        /* --- Cart Sidebar (Drawer) --- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .overlay.open { opacity: 1; pointer-events: all; }
+
+        .drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            max-width: 420px;
+            height: 100%;
+            background: white;
+            z-index: 201;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        }
+
+        .drawer.open { transform: translateX(0); }
+
+        .drawer-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-title { font-size: 1.25rem; font-weight: 700; }
+
+        .close-btn {
+            background: #f1f5f9;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+        .close-btn:hover { background: #e2e8f0; }
+
+        .cart-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-light);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .item-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+        }
+
+        .item-details { flex: 1; }
+
+        .item-name { font-weight: 600; margin-bottom: 0.25rem; font-size: 0.95rem; }
+        .item-price { color: var(--text-muted); font-size: 0.9rem; }
+
+        .item-controls {
+            display: flex;
+            align-items: center;
+            margin-top: 0.75rem;
+            gap: 1rem;
+        }
+
+        .qty-wrap {
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+        }
+
+        .qty-btn {
+            border: none;
+            background: transparent;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+        .qty-btn:hover { color: var(--accent-color); }
+        .qty-val { padding: 0 0.5rem; font-size: 0.9rem; font-weight: 600; }
+
+        .remove-link {
+            font-size: 0.8rem;
+            color: #ef4444;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: auto;
+        }
+
+        .drawer-footer {
+            padding: 2rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        /* --- Checkout Modal --- */
+        .modal-wrapper {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .modal-wrapper.open { opacity: 1; pointer-events: all; }
+
+        .modal-bg {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-card {
+            position: relative;
+            background: white;
+            width: 100%;
+            max-width: 480px;
+            border-radius: var(--radius-md);
+            padding: 2.5rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-wrapper.open .modal-card { transform: translateY(0); }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.9rem; color: var(--text-main); }
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-start);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .pay-btn {
+            width: 100%;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+        .pay-btn:hover { background: #000; }
+
+        /* --- Toast Notification --- */
+        .toast-box {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .toast {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            border-left: 4px solid var(--success);
+            animation: slideLeft 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        @keyframes slideLeft { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+        /* --- Mobile Adjustments --- */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+                white-space: normal; 
+            }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.5rem; }
+            .hero { 
+                height: auto; 
+                grid-template-rows: 300px auto; 
+                margin-top: 70px; 
+                border-radius: 0;
+            }
+            .hero-content { padding: 2rem 1.5rem; }
+            
+            .hero-title { 
+                font-size: 2.2rem; 
+                white-space: normal; 
+                line-height: 1.1;
+            }
+            
+            .socials { display: none; }
+            .checkout-btn { padding: 0.75rem; }
+            
+            /* Footer Mobile */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            /* Grid Produtos Mobile */
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            
+            @media (max-width: 400px) {
+                .grid { grid-template-columns: 1fr; }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-start)"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            Urban<span>Store</span>
+        </div>
+        <div class="nav-actions">
+            <div class="cart-trigger" onclick="toggleCart()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <div class="cart-badge" id="cart-badge">0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-image-wrapper">
+            <img src="https://wallpapers.com/images/hd/colorful-cityscape-desktop-4k-om27xi2a2k6a2klv.jpg" alt="Arquitetura" class="hero-image">
+        </div>
+        <div class="hero-content">
+            <span class="hero-tagline">Lançamento Oficial</span>
+            <h1 class="hero-title">O Futuro do E-commerce Urbano</h1>
+            <p class="hero-desc">Uma experiência de compra fluida, segura e estilosa. Tecnologia de ponta para quem busca o extraordinário.</p>
+            
+            <div class="tech-stack">
+                <div class="pill"><div class="pill-dot" style="background:white"></div> Next.js</div>
+                <div class="pill"><div class="pill-dot" style="background:#635bff"></div> Stripe</div>
+                <div class="pill"><div class="pill-dot" style="background:#38bdf8"></div> Tailwind</div>
+            </div>
+
+            <div class="socials">
+                <div class="social-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                </div>
+                <div class="social-btn">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos -->
+    <main class="container">
+        <div class="section-header">
+            <h2 class="section-title">Coleção Premium</h2>
+        </div>
+        
+        <div class="grid" id="product-grid">
+            <!-- JS vai preencher aqui -->
+        </div>
+
+        <!-- PAGINAÇÃO -->
+        <div class="pagination" id="pagination-controls">
+            <!-- Botões gerados via JS -->
+        </div>
+    </main>
+
+    <!-- Footer Premium -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Coluna 1: Marca -->
+                <div class="footer-brand">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary-start)"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        Urban<span>Store</span>
+                    </h3>
+                    <p>Redefinindo o estilo de vida urbano com peças exclusivas, tecnologia de ponta e design minimalista.</p>
+                </div>
+
+                <!-- Coluna 2: Links Rápidos -->
+                <div class="footer-col">
+                    <h4>Loja</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Lançamentos</a></li>
+                        <li><a href="#">Masculino</a></li>
+                        <li><a href="#">Feminino</a></li>
+                        <li><a href="#">Acessórios</a></li>
+                        <li><a href="#">Sale</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 3: Ajuda -->
+                <div class="footer-col">
+                    <h4>Suporte</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Rastrear Pedido</a></li>
+                        <li><a href="#">Política de Trocas</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Fale Conosco</a></li>
+                    </ul>
+                </div>
+
+                <!-- Coluna 4: Newsletter -->
+                <div class="footer-col">
+                    <h4>Fique por dentro</h4>
+                    <p style="color:#94a3b8; font-size: 0.9rem; margin-bottom: 0.5rem;">Receba novidades e cupons exclusivos.</p>
+                    <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                        <input type="email" placeholder="Seu e-mail" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn">OK</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2023 UrbanStore. Todos os direitos reservados.
+                </div>
+                <div class="payment-methods">
+                    <svg class="payment-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                    <svg class="payment-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
+                    <svg class="payment-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Overlay e Drawer do Carrinho -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <aside class="drawer" id="drawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Seu Carrinho</span>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-list" id="cart-list">
+            <!-- Itens -->
+        </div>
+        <div class="drawer-footer">
+            <div class="total-row">
+                <span>Total</span>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Pagar Agora
+            </button>
+        </div>
+    </aside>
+
+    <!-- Modal de Checkout -->
+    <div class="modal-wrapper" id="checkout-modal">
+        <div class="modal-bg" onclick="closeCheckout()"></div>
+        <div class="modal-card">
+            <h2 style="margin-bottom:1.5rem; font-size:1.5rem;">Pagamento Seguro</h2>
+            <form id="checkout-form" onsubmit="handlePayment(event)">
+                <div class="form-group">
+                    <label class="form-label">E-mail</label>
+                    <input type="email" class="form-input" placeholder="nome@exemplo.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nome no Cartão</label>
+                    <input type="text" class="form-input" placeholder="Como no cartão" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Dados do Cartão</label>
+                    <input type="text" class="form-input" placeholder="0000 0000 0000 0000" maxlength="19" required>
+                </div>
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Validade</label>
+                        <input type="text" class="form-input" placeholder="MM/AA" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CVC</label>
+                        <input type="text" class="form-input" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="pay-btn" id="pay-btn">Confirmar Pagamento</button>
+                <button type="button" onclick="closeCheckout()" style="width:100%; border:none; background:none; color:var(--text-muted); margin-top:1rem; cursor:pointer;">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toasts -->
+    <div class="toast-box" id="toast-box"></div>
+
+    <script>
+        // --- Mock Data com 30 Produtos ---
+        const products = [
+            { id: 1, title: "Jaqueta Bomber Tech", price: 450.00, category: "Outerwear", img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=500&q=80" },
+            { id: 2, title: "Sneaker Urban Black", price: 320.00, category: "Footwear", img: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=500&q=80" },
+            { id: 3, title: "Mochila Minimalista", price: 180.00, category: "Accessories", img: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500&q=80" },
+            { id: 4, title: "Relógio Smart Series", price: 890.00, category: "Electronics", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" },
+            { id: 5, title: "Óculos de Sol Aviator", price: 250.00, category: "Accessories", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&q=80" },
+            { id: 6, title: "Headphone Noise Cancel", price: 599.00, category: "Audio", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" },
+            { id: 7, title: "Camisa Linho Premium", price: 120.00, category: "Apparel", img: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&q=80" },
+            { id: 8, title: "Carteira de Couro", price: 150.00, category: "Accessories", img: "https://images.unsplash.com/photo-1627123424574-724758594e93?w=500&q=80" },
+            { id: 9, title: "Tênis Runner White", price: 299.00, category: "Footwear", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&q=80" },
+            { id: 10, title: "Smartwatch Obsidian", price: 799.00, category: "Electronics", img: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500&q=80" },
+            { id: 11, title: "Bolsa Crossbody Urban", price: 199.00, category: "Accessories", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80" },
+            { id: 12, title: "Moletom Tech Fleece", price: 230.00, category: "Apparel", img: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=80" },
+            { id: 13, title: "Óculos Round Vintage", price: 180.00, category: "Accessories", img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=500&q=80" },
+            { id: 14, title: "Relógio Minimal Gold", price: 350.00, category: "Electronics", img: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=500&q=80" },
+            { id: 15, title: "Headphone Studio Pro", price: 680.00, category: "Audio", img: "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500&q=80" },
+            { id: 16, title: "Boné Street Black", price: 89.00, category: "Apparel", img: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=500&q=80" },
+            { id: 17, title: "Tote Bag de Couro", price: 145.00, category: "Accessories", img: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=500&q=80" },
+            { id: 18, title: "Perfume Urban Night", price: 210.00, category: "Lifestyle", img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&q=80" },
+            // --- Produtos 19 a 30 (Adicionados) ---
+            { id: 19, title: "Smart Band Fit", price: 129.00, category: "Electronics", img: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=500&q=80" },
+            { id: 20, title: "Cachecol Lã Black", price: 90.00, category: "Apparel", img: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=500&q=80" },
+            { id: 21, title: "Tênis Slip On", price: 199.00, category: "Footwear", img: "https://images.unsplash.com/photo-1512374382149-233c42b6a83b?w=500&q=80" },
+            { id: 22, title: "Power Bank 20k", price: 110.00, category: "Electronics", img: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=500&q=80" },
+            { id: 23, title: "Gorro Street Beanie", price: 59.00, category: "Apparel", img: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=500&q=80" },
+            { id: 24, title: "Anel Silver Steel", price: 79.00, category: "Accessories", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=500&q=80" },
+            { id: 25, title: "Jaqueta Windbreaker", price: 290.00, category: "Outerwear", img: "https://images.unsplash.com/photo-1551488852-080175d9a9cd?w=500&q=80" },
+            { id: 26, title: "Camiseta Oversized", price: 95.00, category: "Apparel", img: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&q=80" },
+            { id: 27, title: "Smartwatch Active 2", price: 399.00, category: "Electronics", img: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=500&q=80" },
+            { id: 28, title: "Capa para Notebook", price: 159.00, category: "Accessories", img: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500&q=80" },
+            { id: 29, title: "Mocassim Luxe", price: 450.00, category: "Footwear", img: "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=500&q=80" },
+            { id: 30, title: "Mini Speaker BT", price: 180.00, category: "Audio", img: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500&q=80" }
+        ];
+
+        let cart = [];
+        const itemsPerPage = 8; 
+        let currentPage = 1;
+
+        // --- Init ---
+        window.onload = () => {
+            renderProducts();
+            renderPagination();
+        };
+
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const currentProducts = products.slice(startIndex, endIndex);
+
+            grid.innerHTML = currentProducts.map(p => `
+                <article class="card">
+                    <div class="card-image-container">
+                        <img src="${p.img}" class="card-img" alt="${p.title}">
+                        <button class="add-btn-overlay" onclick="addToCart(${p.id})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Adicionar
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="cat">${p.category}</span>
+                        </div>
+                        <h3 class="card-title">${p.title}</h3>
+                        <div class="price">${formatMoney(p.price)}</div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function renderPagination() {
+            const paginationContainer = document.getElementById('pagination-controls');
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+            
+            let html = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                html += `<button class="page-btn ${activeClass}" onclick="changePage(${i})">${i}</button>`;
+            }
+            
+            paginationContainer.innerHTML = html;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            renderProducts();
+            renderPagination();
+            document.querySelector('.container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            const existing = cart.find(i => i.id === id);
+            
+            if (existing) existing.qty++;
+            else cart.push({ ...prod, qty: 1 });
+
+            updateCartUI();
+            showToast(`"${prod.title}" foi adicionado.`);
+            
+            const badge = document.getElementById('cart-badge');
+            badge.style.transform = 'scale(1.2)';
+            setTimeout(() => badge.style.transform = 'scale(1)', 200);
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-list');
+            const badge = document.getElementById('cart-badge');
+            const totalEl = document.getElementById('cart-total');
+
+            const totalQty = cart.reduce((a, b) => a + b.qty, 0);
+            badge.textContent = totalQty;
+            badge.classList.toggle('active', totalQty > 0);
+
+            if (cart.length === 0) {
+                list.innerHTML = `<div style="text-align:center; color:var(--text-muted); margin-top:2rem;">Seu carrinho está vazio.</div>`;
+                totalEl.textContent = formatMoney(0);
+                return;
+            }
+
+            list.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.img}" class="item-thumb">
+                    <div class="item-details">
+                        <div class="item-name">${item.title}</div>
+                        <div class="item-price">${formatMoney(item.price)}</div>
+                        <div class="item-controls">
+                            <div class="qty-wrap">
+                                <button class="qty-btn" onclick="changeQty(${item.id}, -1)">-</button>
+                                <span class="qty-val">${item.qty}</span>
+                                <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+                            </div>
+                            <span class="remove-link" onclick="removeItem(${item.id})">Remover</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((a, b) => a + (b.price * b.qty), 0);
+            totalEl.textContent = formatMoney(total);
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) removeItem(id);
+            else updateCartUI();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        // --- UI Toggles ---
+        function toggleCart() {
+            const isOpen = document.getElementById('drawer').classList.contains('open');
+            if (isOpen) {
+                document.getElementById('drawer').classList.remove('open');
+                document.getElementById('overlay').classList.remove('open');
+            } else {
+                document.getElementById('drawer').classList.add('open');
+                document.getElementById('overlay').classList.add('open');
+            }
+        }
+
+        function openCheckout() {
+            if (cart.length === 0) return showToast("Adicione produtos primeiro.");
+            toggleCart();
+            document.getElementById('checkout-modal').classList.add('open');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkout-modal').classList.remove('open');
+        }
+
+        function handlePayment(e) {
+            e.preventDefault();
+            const btn = document.getElementById('pay-btn');
+            const original = btn.textContent;
+            
+            btn.textContent = "Processando...";
+            btn.style.opacity = "0.7";
+            
+            setTimeout(() => {
+                closeCheckout();
+                cart = [];
+                updateCartUI();
+                showToast("Pagamento aprovado! Obrigado.");
+                btn.textContent = original;
+                btn.style.opacity = "1";
+                e.target.reset();
+            }, 1500);
+        }
+        
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const input = e.target.querySelector('input');
+            if(input.value) {
+                showToast(`Inscrito com: ${input.value}`);
+                input.value = '';
+            }
+        }
+
+        function formatMoney(val) {
+            return val.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toast-box');
+            const el = document.createElement('div');
+            el.className = 'toast';
+            el.innerHTML = `
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                ${msg}
+            `;
+            container.appendChild(el);
+            setTimeout(() => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(100%)';
+                setTimeout(() => el.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
